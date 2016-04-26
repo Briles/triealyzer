@@ -1,0 +1,40 @@
+doctype html
+html(ng-app="triealyzer", ng-controller="triealyzerCtrl")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(http-equiv='content-type' content='text/html; charset=UTF-8')
+    title Triealyzer
+    meta(
+      name='description'
+      content="Triealyzer creates a regular expression to match any of the words added to the trie. Provides an interface to RegexTrie"
+    )
+    meta(name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1')
+    link(rel='icon' type='image/x-icon' href='favicon.ico')
+    link(href='main.min.css' rel='stylesheet' type='text/css' media='all')
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
+    if (release === false)
+      link(
+        href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,100italic,300italic,400italic,500,500italic,700,700italic,900,900italic'
+        rel='stylesheet'
+        type='text/css'
+      )
+      script(src="//localhost:35729/livereload.js" async)
+      script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js")
+    else
+      link(href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css')
+      script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js")
+    script(src="main.min.js")
+  body
+    .container
+      h1 Triealyzer
+      p Create a regular expression that matches any of the words in the list
+      .input-output.clearfix
+        textarea(ng-model="input" ng-change="make()")
+        textarea(ng-if="output" spellcheck="false") {{output}}
+      ul.test-results
+        li(
+          ng-repeat="(test, result) in tests"
+          ng-class="{success : result, failure: !result}"
+        ) {{result ? "Matches" : "Does not match"}} "{{test}}"
+      p Powered by #[a(href="https://github.com/alexeld/regex-trie" rel="nofollow") RegexTrie]
