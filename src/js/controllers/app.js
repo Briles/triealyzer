@@ -27,7 +27,7 @@ module.exports = function ($scope) {
         var regex = trie.add(list).toRegExp();
         $scope.output = regex.toString().slice(1, -1);
 
-        for (var i = 0; i <= list.length; ++i) {
+        for (var i = 0; i < list.length; ++i) {
           var word = list[i];
           var test = regex.test(word);
           if (test) {
