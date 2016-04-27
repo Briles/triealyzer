@@ -12,7 +12,13 @@ module.exports = function ($scope) {
     });
   };
 
+  $scope.allPassed = function () {
+    return $scope.numPassed === $scope.numTests;
+  };
+
   $scope.make = function () {
+    $scope.numPassed = 0;
+    $scope.numTests = 0;
     if ($scope.input) {
       var list = $scope.list();
       if ($scope.list().length > 1) {
@@ -21,9 +27,15 @@ module.exports = function ($scope) {
         var regex = trie.add(list).toRegExp();
         $scope.output = regex.toString().slice(1, -1);
 
-        for (var i = 0; i < list.length; ++i) {
+        for (var i = 0; i <= list.length; ++i) {
           var word = list[i];
-          $scope.tests[word] = regex.test(word);
+          var test = regex.test(word);
+          if (test) {
+            $scope.numPassed += 1;
+          }
+
+          $scope.numTests += 1;
+          $scope.tests[word] = test;
         }
       }
     }

@@ -36,5 +36,10 @@ html(ng-app="triealyzer", ng-controller="triealyzerCtrl")
         li(
           ng-repeat="(test, result) in tests"
           ng-class="{success : result, failure: !result}"
+          ng-if="list().length <= 5"
         ) {{result ? "Matches" : "Does not match"}} "{{test}}"
+        li(
+          ng-class="{success : allPassed(), failure: !allPassed()}"
+          ng-if="list().length > 5"
+        ) {{numPassed}} of {{numTests}} matched
       p Powered by #[a(href="https://github.com/alexeld/regex-trie" rel="nofollow") RegexTrie]
