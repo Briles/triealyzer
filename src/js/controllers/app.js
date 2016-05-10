@@ -4,6 +4,7 @@ module.exports = function ($scope) {
   var RegexTrie = require('regex-trie');
 
   $scope.trimRe = false;
+  $scope.matchWord = false;
   $scope.input = ['foo', 'bar', 'baz'].join('\n');
   $scope.tests = {};
 
@@ -30,6 +31,10 @@ module.exports = function ($scope) {
 
         if ($scope.trimRe) {
           output = output.replace(/\(\?\:/g, '(');
+        }
+
+        if ($scope.matchWord) {
+          output = '\\b' + output + '\\b';
         }
 
         $scope.output = output;

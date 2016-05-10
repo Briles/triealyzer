@@ -32,6 +32,9 @@ html(ng-app="triealyzer", ng-controller="triealyzerCtrl")
       label
         input(type="checkbox" ng-model="trimRe")
         span Output capturing groups
+      label
+        input(type="checkbox" ng-model="matchWord")
+        span Match whole words only
       .input-output.clearfix
         textarea(ng-model="input" ng-change="make()")
         textarea(ng-if="output" spellcheck="false") {{output}}
