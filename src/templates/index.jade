@@ -29,6 +29,9 @@ html(ng-app="triealyzer", ng-controller="triealyzerCtrl")
     .container
       h1 Triealyzer
       p Create a regular expression that matches any of the words in the list
+      label
+        input(type="checkbox" ng-model="trimRe")
+        span Output capturing groups
       .input-output.clearfix
         textarea(ng-model="input" ng-change="make()")
         textarea(ng-if="output" spellcheck="false") {{output}}

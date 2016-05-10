@@ -3,6 +3,7 @@ module.exports = function ($scope) {
 
   var RegexTrie = require('regex-trie');
 
+  $scope.trimRe = false;
   $scope.input = ['foo', 'bar', 'baz'].join('\n');
   $scope.tests = {};
 
@@ -25,7 +26,13 @@ module.exports = function ($scope) {
         $scope.tests = {};
         var trie = new RegexTrie();
         var regex = trie.add(list).toRegExp();
-        $scope.output = regex.toString().slice(1, -1);
+        var output = regex.toString().slice(1, -1);
+
+        if ($scope.trimRe) {
+          output = output.replace(/\(\?\:/g, '(');
+        }
+
+        $scope.output = output;
 
         for (var i = 0; i < list.length; ++i) {
           var word = list[i];
